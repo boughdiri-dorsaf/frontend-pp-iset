@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800" rel="stylesheet">
+</head>
+
+<body class="fix-menu common-img-bg">
+  <section class="login p-fixed d-flex text-center bg-primary common-img-bg" style='overflow: auto;position: relative;'>
+    <div class="container">
+      <div class="row">
+        <!--<div *ngIf='!errormsg' class="alert alert-danger animephase2" [style.opacity]="errormsg ? '0' : '1'"
+          [style.visibility]="errormsg ? 'hidden' : 'visible'" style="right: 1px;position: absolute">
+          <button (click)='errormsg=false' type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="icofont icofont-close-line-circled"></i>
+          </button>
+          <strong>Error : </strong><code> {{msg}}</code>
+        </div> -->
+        <div class="col-sm-12">
+          <div class="login-card card-block auth-body mr-auto ml-auto">
+            <div class="md-float-material">
+              <div class="text-center">
+                <img src="assets/images/iset.png" alt="logo.png">
+              </div>
+              <div *ngIf='secondphase ' [style.opacity]="firstphase ? '0' : '1'"
+                [style.visibility]="firstphase ? 'hidden' : 'visible'" class="auth-box animphases">
+                <div class="row m-b-20">
+                  <div class="col-md-12">
+                    <h2 class="text-center text-primary" >INSCRIPTION</h2><br>
+                    <h4 class="text-left" style="color: #666666;">Informations personnelles</h4>
+                  </div>
+                </div>
+                <hr />
+                <form #ngForm="ngForm" (ngSubmit)="FirsttoSecond()">
+
+                  <div class="form-group">
+                    <input type="text" [(ngModel)]="userPlatform.nom"  required name="nom" #nom="ngModel"  class="form-control" placeholder="Nom">
+                    <span class="form-text text-muted text-left" *ngIf="nom.touched && !nom.valid">Entrez votre nom !</span>
+                  </div>
+                  <div class="form-group">
+                    <input type="text" [(ngModel)]="userPlatform.prenom"  required name="prenom" #prenom="ngModel" class="form-control" placeholder="Prenom">
+                    <span class="form-text text-muted text-left" *ngIf="prenom.touched && !prenom.valid">Entrez votre prenom !</span>
+                  </div>
+                  <div class="form-group">
+                    <input type="text" [(ngModel)]="userPlatform.cin" name="cin" maxlength="8" minlength="8" [required]="num_passport.value == ''" #cin="ngModel" class="form-control" placeholder="Cin" size="8">
+                    <span class="form-text text-muted text-left" *ngIf="cin.touched && !cin.valid && cin.errors.maxlength && cin.errors.minlength">Entrez cin valid !</span>
+                  </div>
+                  <div class="form-group">
+                    <input type="text" [(ngModel)]="userPlatform.num_passport" name="num_passport" #num_passport="ngModel" class="form-control" placeholder="Passport">
+                    <span class="form-text text-muted text-left" *ngIf="num_passport.touched && !num_passport.valid">Entrez num passport valid!</span>
+                  </div>
+                  <div class="form-group">
+                    <input type="date" class="form-control" required [(ngModel)]="userPlatform.date_naissance" name="date_naissance" #date_naissance ="ngModel" placeholder="Date Naissance">
+                    <span class="form-text text-muted text-left" *ngIf="date_naissance.touched && !date_naissance.valid">Entrez votre date de naissance  !</span>
+                  </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" [(ngModel)]="userPlatform.gouvern_naissance" required name="gouvern_naissance" #gouvernnaissance="ngModel" placeholder="Gouvernorat Naissance">
+                  <span class="md-line"></span>
+                </div>
+                  <div class="form-group">
+                    <select name="sexe" [(ngModel)]="userPlatform.sexe" #sexe="ngModel" class="form-control">
+                      <option value="Masculin">Masculin</option>
+                      <option value="Feminin">Feminin</option>
+                    </select>
+                    <span class="md-line"></span>
+                  </div>
+
+                <div class="row m-t-30">
+                  <div class="col-md-12">
+                    <button type="submit"
+                      class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20" [disabled]="!ngForm.valid">Suivant</button>
+                  </div>
+                </div>
+              </form>
+                <hr/>
+                <div class="row">
+                  <div class="col-md-10">
+                    <p class="text-inverse text-left">Copyright &copy; 2021. I.S.E.T Rades</p>
+                    <p class="text-inverse text-left m-b-0"><b><a style='color:lightseagreen'
+                      [routerLink]="['/auth']">Vous-avez un compte? Connecter</a></b></p>
+
+                  </div>
+                  <div class="col-md-2">
+                    <img class='smallimg' src="assets/images/iset.png" alt="small-logo.png">
+                  </div>
+                </div>
+
+              </div>
+              <div *ngIf='firstphase ' [style.opacity]="secondphase ? '0' : '1'"
+                [style.visibility]="secondphase ? 'hidden' : 'visible'" class="auth-box animphases">
+                <div class="row m-b-20">
+                  <div class="col-md-12">
+                    <h4 class="text-left" style="color: #666666;">Compte</h4>
+                  </div>
+                </div>
+                <hr />
+                <form #ngForm2="ngForm">
+
+                <div class="form-group">
+                  <input type="email" [(ngModel)]="userPlatform.email" required name="email" pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" #email="ngModel" class="form-control" placeholder="Adresse email">
+                  <span class="form-text text-muted text-left" *ngIf="email.touched && !email.valid && email.errors?.pattern">Entrez adresse email valid !</span>
+                </div>
+
+                <div class="form-group">
+                  <input type="password" required [(ngModel)]="userPlatform.password" name="password" pattern='(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}' #passwordd="ngModel" class="form-control" placeholder="Mot de passe">
+                  <span class="form-text text-muted text-left" *ngIf="passwordd.touched && !passwordd.valid && passwordd.errors?.pattern">Entrez password !</span>
+                </div>
+
+                <div class="form-group">
+                  <input type="password" class="form-control" required [(ngModel)]="confirmpassword" name="confirmpassword" #confirmpasswordd="ngModel" pattern="{{passwordd.value}}" placeholder="Confirmer Mot de passe">
+                  <span class="form-text text-muted text-left" *ngIf="confirmpasswordd.errors?.pattern">password non confirme !</span>
+                </div>
+
+                <div class="row m-b-20">
+                  <div class="col-md-12">
+                    <h4 class="text-left" style="color: #666666;">Adresse</h4>
+                  </div>
+                </div>
+                <hr />
+
+                <div class="form-group">
+                  <input type="text" class="form-control" [(ngModel)]="userPlatform.pays" required name="pays" #pays="ngModel" placeholder="Pays">
+                  <span class="md-line"></span>
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" [(ngModel)]="userPlatform.ville" required name="ville" #ville="ngModel" placeholder="Ville">
+                  <span class="md-line"></span>
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" [(ngModel)]="userPlatform.gouvernorat_adresse" required name="gouvernorat_adresse" #gouverneratadresse="ngModel" placeholder="Gouvernorat">
+                  <span class="md-line"></span>
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" [(ngModel)]="userPlatform.rue" required name="rue" #rue="ngModel" placeholder="Rue">
+                  <span class="form-text text-muted text-left" *ngIf="rue.touched && !rue.valid">Entrez votre adresse !</span>
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" [(ngModel)]="userPlatform.code_postale" required name="code_postale" #codepostale="ngModel" placeholder="Code postal">
+                  <span class="form-text text-muted text-left" *ngIf="codepostale.touched && !codepostale.valid">Entrez votre code postale !</span>
+                </div>
+
+                  <div class="form-group">
+                    <select name="sexe" [(ngModel)]="userPlatform.id_situation_professionnel" #id_situation_professionnel="ngModel" class="form-control">
+                      <option value="1">Employeur</option>
+                      <option value="2">Etudiant</option>
+                      <option value="3">Autre</option>
+                    </select>
+                    <span class="md-line"></span>
+                  </div>
+
+                <div class="row m-t-30">
+                  <div class="col-md-6">
+                    <button type="button" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20"
+                      (click)='SecondtoFirst()'>Précédent</button>
+                  </div>
+                  <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20"
+                      (click)='Register()' [disabled]="!ngForm2.valid">S'incrire</button>
+                  </div>
+                </div>
+                </form>
+                <hr />
+                <div class="row">
+                  <div class="col-md-10">
+                    <p class="text-inverse text-left">Copyright &copy; 2021. I.S.E.T Rades</p>
+                  </div>
+                  <div class="col-md-2">
+                    <img class='smallimg' src="assets/images/iset.png" alt="small-logo.png">
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <script type="text/javascript" src="assets/js/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="assets/js/jquery-ui/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="assets/js/popper.js/popper.min.js"></script>
+  <script type="text/javascript" src="assets/js/bootstrap/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="assets/js/jquery-slimscroll/jquery.slimscroll.js"></script>
+  <script type="text/javascript" src="assets/js/modernizr/modernizr.js"></script>
+  <script type="text/javascript" src="assets/js/modernizr/css-scrollbars.js"></script>
+  <script type="text/javascript" src="assets/js/common-pages.js"></script>
+</body>
+
+</html>

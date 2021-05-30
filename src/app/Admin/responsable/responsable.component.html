@@ -1,0 +1,245 @@
+<div class="row">
+  <div class="col-md-12 col-xl-12">
+    <div class="card widget-card-1">
+      <div class="card-block-small" style='height: 90px;'>
+        <i class="icofont icofont-id bg-c-primary card1-icon"></i>
+        <span class="text-c-blue f-w-600">Liste des Responsables</span>
+        <div>
+        <span class="f-left m-t-10 text-muted">
+        </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  
+
+    <div [hidden]='tableresponsable' class="col-md-12 col-xl-12">
+      <app-card [title]="'Liste des Responsable'" [cardClass]="'project-task'" [blockClass]="'p-b-10'">
+        <button class='btn btn-success' (click)='tableresponsable=true;ajoutresponsable=false' style="margin-bottom: 2%;margin-left: 80%;">Ajouter Responsable</button>
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+            <tr>
+             
+              <th>Nom & prenom</th>
+              <th>Email</th> 
+              <th>Qualite</th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of lstres | paginate: { id: 'masters',
+            itemsPerPage: 4,
+            currentPage: p
+            }">
+            <td>
+              <p class="d-inline-block m-r-20">{{item.prenom+" "+item.nom}}</p>
+            </td>
+            
+              <td>
+                <div class="task-contain">
+                  <p class="d-inline-block m-l-20">{{item.email}}</p>
+                </div>
+              </td>
+              <td>
+                <p class="d-inline-block m-r-20">{{item.qualite}}</p>
+              </td>
+              <td>
+               <button class="btn-danger btn btn-comment btn-round" style='margin-right:5%'><i style='color:white' class="ti-trash"></i></button>
+               <button class="btn-warning btn btn-comment btn-round" style='margin-right:5%'><i class="ti-pencil"></i></button>
+               <button (click)='open(content)' class="btn-success btn btn-comment btn-round"><i class="ti-plus"></i></button>
+              </td>
+              
+            </tr>
+           
+            </tbody>
+          </table>
+         
+        </div>
+      </app-card>
+    </div>
+    <div [hidden]='ajoutresponsable' class="col-md-12 col-xl-8" style="display: table;margin-left: auto;margin-right: auto;">
+        <app-card [title]="'Ajouter Responsable'" [cardClass]="'project-task'" [blockClass]="'p-b-10'">
+            <div class="container">
+                <div class="row">
+                  <div class="col-sm">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Nom</label>
+                        <input [(ngModel)]="U.nom" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrer ">
+                        
+                      </div>
+                  </div>
+                  <div class="col-sm">
+                    
+                  </div>
+                  
+                </div>
+              </div>
+              <div class="container">
+                
+                <div class="row">
+                  <div class="col-sm">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Prenom :</label>
+                        <input [(ngModel)]="U.prenom"  type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+                      </div>
+                  </div>
+                  <div class="col-sm">
+                    
+                  </div>
+                  
+                </div>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Cin</label>
+                        <input [(ngModel)]="U.cin"  type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder=" ">
+
+                      </div>
+                  </div>
+                  <div class="col-sm">
+                    
+                  </div>
+                 
+                </div>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Date Naissance :</label>
+                        <input [(ngModel)]="U.date_naissance"  type="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+
+                      </div>
+                  </div>
+                  <div class="col-sm">
+                    
+                  </div>
+                  
+                </div>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Genre :</label>
+                        <select class='form-control' [(ngModel)]="U.sexe">
+                            <option value="Masculin"> Masculin</option>
+                            <option value="Feminin">Feminin </option>
+                        </select> 
+                      </div>
+                  </div>
+                  <div class="col-sm">
+                    
+                  </div>
+                
+                </div>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Num Passport :</label>
+                        <input [(ngModel)]="U.num_passport"  type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+
+                      </div>
+                  </div>
+                  <div class="col-sm">
+                    
+                  </div>
+                  
+                </div>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email :</label>
+                        <input [(ngModel)]="U.email"  type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+
+                      </div>
+                  </div>
+                  <div class="col-sm">
+                    
+                  </div>
+                  
+                </div>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Mot de Passe :</label>
+                        <input [(ngModel)]="U.password"  type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+
+                      </div>
+                  </div>
+                  <div class="col-sm">
+                    
+                  </div>
+                 
+                </div>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Nom Group responsable :</label>
+                        <input [(ngModel)]="Qualite"  type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+
+                      </div>
+                  </div>
+                  <div class="col-sm">
+                    
+                  </div>
+                 
+                </div>
+              </div>
+              <div style='margin-top: 5%;margin-bottom: 3%;margin-left: 66%;' class='row'>
+                <button class='btn btn-danger' style='margin-bottom: 4%;margin-right: 3%;'(click)='tableresponsable=false;ajoutresponsable=true'>Annuler</button>
+                <button class='btn btn-success' style='margin-bottom: 4%;' (click)='ajouterresponsable()'>Ajouter</button>
+              </div>
+        </app-card>
+    </div>
+  </div>
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Ajouter Classe</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div>
+        <div class="form-group">
+          <label for="Domaine">Libelle</label>
+          <div class="input-group">
+            <input [(ngModel)]="D.libelle" id="Domaine" class="form-control"  type='text'>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="Domaine">Responsable</label>
+          <div class="input-group">
+            <select [(ngModel)]="D.id_responsable_group" id="Domaine" class="form-control" >
+              <option *ngFor="let item of lstres" [value]='item.id_responsable_group' >{{item.qualite}}</option>
+            </select>
+            
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="Domaine">Nombre des Etudiants</label>
+          <div class="input-group">
+            <input [(ngModel)]="D.nb_etudiant" id="Domaine" class="form-control"  type='text'>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="ajouterClasse();modal.close('Save click')">Enregistrer</button>
+    </div>
+  </ng-template>
+  

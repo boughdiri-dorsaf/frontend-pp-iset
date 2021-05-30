@@ -1,0 +1,234 @@
+<div class="row">
+  <div class="col-md-12 col-xl-12">
+    <div class="card widget-card-1">
+      <div class="card-block-small" style='height: 90px;'>
+        <i class="icofont icofont-briefcase bg-c-yellow card1-icon"></i>
+        <span class="text-c-blue f-w-600">Mon Cursus</span>
+        <div>
+        <span class="f-left m-t-10 text-muted">
+        
+        </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+    <app-card style='width: 100%;' [title]="'Mon Cursus'" [cardClass]="'project-task'" [blockClass]="'p-b-10'">
+       
+       <div >
+         <div class="container">
+           <!--
+             <div class="row">
+            <div class="col-sm">
+              <div class="form-group">
+                  <label for="exampleInputEmail1"> Gouvernorat de Naissance : </label>
+                  <select [(ngModel)]="E.gouvern_naissance" class='form-control'>
+                      <option *ngFor="let item of lstvilles"  [value]='item.city'>{{item.city}}</option>
+                   </select>
+              </div>
+            </div>
+              <div class="col-sm">
+               
+              </div>
+              
+            
+           </div>
+           -->
+           <div class="row">
+            <div class="col-sm">
+              <label for="exampleInputEmail1"> Departement : </label>
+              <select [(ngModel)]="E.id_departement" class='form-control'>
+                 <option *ngFor="let item of lstdep"  [value]='item.id_departement'> {{item.libelle}} </option>
+              </select>
+            </div>
+            <div class="col-sm"></div>
+            
+
+           </div>
+           <!--
+             <div class="row">
+            <div class="col-sm">
+              <label for="exampleInputEmail1"> Classe : </label>
+              <select [(ngModel)]="E.id_classe"  class="form-control">
+                <option *ngFor="let item of lstclasses"  [value]='item.id_classe'>{{item.libelle}}</option>
+              </select>
+            </div>
+            <div class="col-sm"></div>
+           
+           </div>
+           -->
+           <div class="row">
+            <div class="col-sm">
+              <label for="exampleInputEmail1"> Situation : </label>
+              <select [(ngModel)]="E.id_situation_etudiant" class='form-control'>
+                <option *ngFor="let item of lstsituations"  [value]='item.id_situation_etudiant'>{{item.libelle}}</option>
+              </select>
+            </div>
+            <div class="col-sm"></div>
+
+           </div>
+         </div>
+         <button [hidden]='!exist'  class='btn btn-success' style='margin-left: 81%;margin-bottom: 6%;' (click)='ajouteretudiant()'>Enregistrer</button>
+         <button [hidden]='exist'  class='btn btn-success' style='margin-left: 81%;margin-bottom: 6%;'>Enregistrer</button>
+        
+       </div>
+         
+    </app-card>
+    
+</div>
+<div class='row'>
+  <app-card style='width: 100%;' [title]="'Liste des Cursus'" [cardClass]="'project-task'" [blockClass]="'p-b-10'">
+    <div [hidden]='!switch'>
+      <button [hidden]='exist'  (click)='switch=false;' class='btn btn-success' style='margin-left: 85%;margin-bottom: 4%;'>Ajouter Cursus</button>
+      <table [hidden]='exist' class="table table-striped">
+        <thead>
+          <tr>
+            <th>Année Universitaire</th>
+            <th>Établissement</th>
+            <th>Domaine</th>
+            <th>Spécialité</th>
+            <th>Niveau</th>
+            <th>Moyenne	</th>
+            <th>Credit	</th>
+            <th>Mention</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let item of lstcursus" >
+            <tr>
+              <td> {{item.au_debut+"/"+item.au_fin}} </td>
+              <td> {{getetablissement(item.id_etablissement)}} </td>
+              <td> {{getdomaine(item.id_domaine)}} </td>
+              <td> {{getspecialite(item.id_specialite)}} </td>
+              <td> {{getniveau(item.id_niveau)}} </td>
+              <td> {{item.moyenne}} </td>
+              <td> {{item.credit}} </td>
+              <td> {{item.mention}} </td>
+              <td><button (click)='supprimercursus(item.id_cursus)' type="button" class="btn btn-danger btn-sm">Supprimer</button></td>
+            </tr>
+          </ng-container>
+        </tbody>
+        </table>
+    </div>
+    <div [hidden]='switch'>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <div class="form-group">
+              <label for="exampleInputEmail1"> Annee Debut: </label>
+              <select [(ngModel)]="C.au_debut"   class="form-control">
+                  <option *ngFor="let item of lstAUdeb"  [value]='item.nom'>{{item.nom}}</option>
+                </select>
+              
+            </div>
+          </div>
+          <div class="col-sm">
+            <div class="form-group">
+              <label for="exampleInputEmail1"> Annee Fin: </label>
+              <select  [(ngModel)]="C.au_fin"   class="form-control">
+                  <option *ngFor="let item of lstAUdeb" [value]='item.nom'>{{item.nom}}</option>
+                </select>
+              
+            </div>
+          </div>
+          <div class="col-sm">
+            <div class="form-group">
+              <label for="exampleInputEmail1"> Etablissement : </label>
+              <select [(ngModel)]="C.id_etablissement"  class="form-control">
+                  <option *ngFor="let item of lstetab"  [value]='item.id_etablissement'>{{item.libelle}}</option>
+                </select>
+              
+            </div>
+          </div>
+          <div class="col-sm">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Domaine : </label>
+               
+                <select   [(ngModel)]="C.id_domaine" (ngModelChange)='getspecialties(C.id_domaine)' class="form-control">
+                    <option *ngFor="let item of lstdomaine"  [value]='item.id_domaine'>{{item.libelle}}</option>
+                  </select>
+              </div>
+        </div>
+        </div>
+       
+      </div>
+      <div class="container">
+        <div class="row">
+            <div class="col-sm">
+              <div class="form-group">
+                  <label for="exampleInputEmail1"> Specialite : </label>
+                  <select [(ngModel)]="C.id_specialite"  class="form-control">
+                      <option *ngFor="let item of lstspecialite"  [value]='item.id_specialite'>{{item.libelles}}</option>
+                    </select>
+                  
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Niveau : </label>
+                   
+                    <select [(ngModel)]="C.id_niveau" class="form-control">
+                        <ng-container *ngFor="let item of lstNiveau"  >
+                          <option [value]='item.id_niveau'>{{item.libelle}}</option>
+                        </ng-container>
+                       
+                      </select>
+                  </div>
+            </div>
+            <div class="col-sm">
+             <ng-container *ngIf="C.Niveau==3" >
+                <div class="form-group">
+                    <label for="exampleInputEmail1"> Note P.F.E : </label>
+                    <input [(ngModel)]="C.PFE" type="number" max="60" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Note PFE ">
+                  </div>
+             </ng-container>
+             
+          </div>
+          </div>
+      </div>
+     
+      <div class="container">
+        <div class="row">
+            <div class="col-sm">
+              <label for="Session"> Session : </label>
+              <select [(ngModel)]="C.session" class="form-control">
+                <option value='Principale'>Principale</option>
+                <option value='Controle'>Controle</option>
+              </select>
+            </div>
+            <div class="col-sm">
+                <div class="form-group">
+                    <label for="exampleInputEmail1"> Moyenne : </label>
+                    <input [(ngModel)]="C.moyenne"  type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Moyenne ">
+                  </div>
+            </div>
+            <div class="col-sm">
+                <div class="form-group">
+                    <label for="exampleInputEmail1"> Credit : </label>
+                    <input  [(ngModel)]="C.credit" type="number" max="60" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Moyenne ">
+                  </div>
+          </div>
+          <div class="col-sm">
+            <div class="form-group">
+                <label for="exampleInputEmail1"> Mention : </label>
+                <select [(ngModel)]="C.mention"  class="form-control">
+                    <option value='Passable'>Passable</option>
+                    <option value='Bien'>Bien</option>
+                    <option value='Trés Bien'>Trés Bien</option>
+                    <option value='Excellent'>Excellent</option>
+                  </select>
+              </div>
+      </div>
+          </div>
+      </div>
+      <div style='    margin-top: 5%;
+      margin-bottom: 3%;
+      margin-left: 76%;'>
+        <button type='button' class="btn btn-danger" style='margin-right: 2%;' (click)='switch=true'>Annuler</button>
+        <button type='button' class="btn btn-success" (click)='AjouterCursus()'>Enregistrer</button>
+      </div>
+     </div>
+  </app-card>
+</div>

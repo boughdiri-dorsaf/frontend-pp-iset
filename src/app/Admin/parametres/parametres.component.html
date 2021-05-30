@@ -1,0 +1,230 @@
+<div class="row">
+  <div class="col-md-12 col-xl-12">
+    <div class="card widget-card-1">
+      <div class="card-block-small" style='height: 90px;'>
+        <i class="icofont icofont-settings-alt bg-c-yellow card1-icon"></i>
+        <span class="text-c-blue f-w-600">Parametres</span>
+        <div>
+        <span class="f-left m-t-10 text-muted">
+        
+        </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class='row'>
+    <div  class="col-md-12 col-xl-6">
+        <app-card (click)='open(content)' [title]="'Liste des Domaines'" [cardClass]="'project-task'" [blockClass]="'p-b-10'">
+        <button  class='btn btn-success btn-outline'  style="margin-bottom: 2%;margin-left: 80%;"><i class='ti-plus'></i></button>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+              <tr>
+                <th>id</th>
+                <th>Domaine</th> 
+                <th>Actions</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of lstdomains | paginate: { id: 'domaine',
+              itemsPerPage: 4,
+              currentPage: p
+              }">
+              <td>
+                <p class="d-inline-block m-r-20">{{item.id_domaine}}</p>
+              </td>
+                <td>
+                  <p class="d-inline-block m-r-20">{{item.libelle}}</p>
+                </td>
+                <td>
+                 <button class="btn-danger btn btn-comment btn-round" style='margin-right:5%'><i style='color:white' class="ti-trash"></i></button>
+                 <button class="btn-warning btn btn-comment btn-round"><i class="ti-pencil"></i></button>
+                </td>
+                
+              </tr>
+             
+              </tbody>
+            </table>
+            <pagination-controls  id="domaine"
+           
+            style="margin-left: auto;
+            margin-right: auto;
+            display: table;"
+            responsive="true"
+            previousLabel="Précédent"
+            nextLabel="Suivant"
+           >
+</pagination-controls>
+          </div>
+        </app-card>
+      </div>
+      <div  class="col-md-12 col-xl-6">
+        <app-card [title]="'Liste des Specialités'" [cardClass]="'project-task'" [blockClass]="'p-b-10'">
+            <button (click)='open2(content2)' class='btn btn-success btn-outline'  style="margin-bottom: 2%;margin-left: 80%;"><i class='ti-plus'></i></button>
+          <div class="table-responsive">
+
+            <table class="table table-hover">
+              <thead>
+              <tr>
+                <th>id</th>
+                <th>Domaine</th> 
+                <th>Specialité</th> 
+                <th>Actions</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of lstSpecialite | paginate: { id: 'specialite',
+              itemsPerPage: 4,
+              currentPage: p
+              }">
+              <td>
+                <p class="d-inline-block m-r-20">{{item.id_specialite}}</p>
+              </td>
+                <td>
+                  <p class="d-inline-block m-r-20">{{item.libelled}}</p>
+                </td>
+                <td>
+                    <p class="d-inline-block m-r-20">{{item.libelles}}</p>
+                  </td>
+                <td>
+                 <button class="btn-danger btn btn-comment btn-round" style='margin-right:5%'><i style='color:white' class="ti-trash"></i></button>
+                 <button class="btn-warning btn btn-comment btn-round"><i class="ti-pencil"></i></button>
+                </td>
+                
+              </tr>
+             
+              </tbody>
+            </table>
+            <pagination-controls  id="specialite"
+           
+            style="margin-left: auto;
+            margin-right: auto;
+            display: table;"
+            responsive="true"
+            previousLabel="Précédent"
+            nextLabel="Suivant"
+           >
+</pagination-controls>
+           
+          </div>
+        </app-card>
+      </div>
+      <div  class="col-md-12 col-xl-6">
+        <app-card [title]="'Liste des Niveaux'" [cardClass]="'project-task'" [blockClass]="'p-b-10'">
+            <button (click)='open3(content3)' class='btn btn-success btn-outline'  style="margin-bottom: 2%;margin-left: 80%;"><i class='ti-plus'></i></button>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+              <tr>
+                <th>id</th>
+                <th>Niveau</th> 
+                <th>Actions</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of lstniveau | paginate: { id: 'niveau',
+              itemsPerPage: 4,
+              currentPage: p
+              }">
+              <td>
+                <p class="d-inline-block m-r-20">{{item.id_niveau}}</p>
+              </td>
+                <td>
+                    <p class="d-inline-block m-r-20">{{item.libelle}}</p>
+                  </td>
+                <td>
+                 <button class="btn-danger btn btn-comment btn-round" style='margin-right:5%'><i style='color:white' class="ti-trash"></i></button>
+                 <button class="btn-warning btn btn-comment btn-round"><i class="ti-pencil"></i></button>
+                </td>
+                
+              </tr>
+             
+              </tbody>
+            </table>
+            <pagination-controls  id="niveau"
+           
+            style="margin-left: auto;
+            margin-right: auto;
+            display: table;"
+            responsive="true"
+            previousLabel="Précédent"
+            nextLabel="Suivant"
+           >
+</pagination-controls>
+          </div>
+        </app-card>
+      </div>
+</div>
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Ajouter Domaine</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div>
+        <div class="form-group">
+          <label for="Domaine">Libelle</label>
+          <div class="input-group">
+            <input [(ngModel)]="D.libelle" id="Domaine" class="form-control"  type='text'>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="ajouterDomaine();modal.close('Save click')">Enregistrer</button>
+    </div>
+  </ng-template>
+
+  <ng-template #content2 let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="Specialité">Ajouter Spéialité</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div>
+        <div class="form-group">
+          <label for="Domaine">Libelle</label>
+          <div class="input-group">
+            <input [(ngModel)]="S.libelle" id="Domaine" class="form-control"  type='text'>
+          </div>
+        </div>
+        <div class="form-group">
+            <label for="Domaine">Domaine</label>
+            <div class="input-group">
+             <select [(ngModel)]="S.id_domaine"   class='form-control'>
+               <option *ngFor="let item of lstdomains" [value]="item.id_domaine">{{item.libelle}}</option>
+             </select>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="ajouterSpecialite();modal.close('Save click')">Enregistrer</button>
+    </div>
+  </ng-template>
+  <ng-template #content3 let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="Niveau">Ajouter Niveau</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div>
+        <div class="form-group">
+          <label for="Niveau">Libelle</label>
+          <div class="input-group">
+            <input [(ngModel)]="N.libelle" id="Niveau" class="form-control"  type='text'>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="ajouterNiveau();modal.close('Save click')">Enregistrer</button>
+    </div>
+  </ng-template>
