@@ -29,7 +29,7 @@
     "c3": "^0.4.21",
     "core-js": "^2.4.1",
     "css-animator": "^2.3.0",
-    "d3": "^4.13.0",
+    "d3": "^7.6.1",
     "font-awesome-scss": "^1.0.0",
     "jquery": "^3.6.0",
     "jquery-sparkline": "^2.4.0",
